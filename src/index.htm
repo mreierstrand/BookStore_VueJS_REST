@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Olivers Book Store</title>
+  <link rel="stylesheet" type="text/css" href="bundle.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<style>
+
+table {
+  border-collapse: collapse;
+  width: 98%;
+}
+
+table, th, td {
+  border: 1px solid black;
+  margin-top: 1em;
+  margin-left: 1em;
+  padding: 5px;
+}
+
+th{
+  background-color: #0072cc;
+  color: white;
+}
+
+thead tr th:first-child,
+tbody tr td:first-child {
+  width: 2em;
+  min-width: 2em;
+  max-width: 2em;
+  word-break: break-all;
+}
+
+tr:nth-of-type(odd) {
+  background-color:white;
+}
+
+tr:nth-child(even) {
+  background-color: lightsteelblue;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.button {
+  transition-duration: 0.4s;
+}
+
+.button:hover {
+  background: red;
+}
+
+</style>
+<body>
+  <h1 style="margin-left: 15px;">Gruppe 9s Book Store made with VueJS</h1>
+
+  <div id="app">
+    <button v-on:click="getAllBooks" class="btn btn-outline-info" style="margin-left: 1em;" >Get all books</button>
+
+    <table>
+      <thead>
+        <tr v-if="books.length">
+          <th scope="col">ID</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Publisher</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="book in books">
+          <td>{{ book.id }}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.publisher }}</td>
+          <td>{{ book.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-left: 15px; margin-top: 1em;">Add book</h2>
+    <input v-model="formData.title" placeholder="Title" type="text" style="margin-left: 1em;" />
+    <input v-model="formData.author" placeholder="Author" type="text" />
+    <input v-model="formData.publisher" placeholder="Publisher" type="text" />
+    <input v-model="formData.price" placeholder="Price" type="number" />
+    <button v-on:click="addBook" class="btn btn-outline-success btn-sm" style="margin-top: -3px;">Add</button>
+    <div style="margin-left: 15px;">{{addMessage}}</div>
+
+    <h2 style="margin-left: 15px; margin-top: 1em;">Delete book</h2>
+    <input v-model="deleteId" placeholder="Book ID" type="number" style="margin-left: 1em;">
+    <button v-on:click="deleteBook(deleteId)" class="btn btn-outline-danger btn-sm" style="margin-top: -3px;" >Delete</button>
+    <div style="margin-left: 15px;">{{deleteMessage}}</div>
+
+
+
+  </div>
+  <script src="bundle.js"></script>
+</body>
+
+</html>
